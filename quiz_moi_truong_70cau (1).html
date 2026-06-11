@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>环保主题语法练习 — HSK 4–5（70题）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f5f5f0;color:#1a1a18;min-height:100vh;}
+.page{max-width:780px;margin:0 auto;padding:2rem 1.25rem 4rem;}
+header{margin-bottom:2rem;border-bottom:1px solid #e0dfd6;padding-bottom:1.25rem;}
+header h1{font-size:22px;font-weight:600;margin-bottom:.4rem;color:#1a1a18;}
+header p{font-size:14px;color:#888780;}
+.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:8px;}
+.score-box{display:flex;gap:10px;}
+.metric{background:#fff;border:1px solid #e0dfd6;border-radius:8px;padding:8px 18px;text-align:center;}
+.metric .val{font-size:22px;font-weight:600;color:#1a1a18;}
+.metric .lbl{font-size:11px;color:#888780;margin-top:2px;}
+.reset-btn{font-size:13px;padding:7px 16px;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer;color:#555;}
+.reset-btn:hover{background:#f0efea;}
+.prog-bar{height:5px;background:#e0dfd6;border-radius:3px;margin-bottom:1.5rem;overflow:hidden;}
+.prog-fill{height:100%;background:#1D9E75;border-radius:3px;transition:width .3s;}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.5rem;}
+.ftag{font-size:12px;padding:5px 13px;border-radius:20px;border:1px solid #ccc;background:#fff;color:#666;cursor:pointer;transition:all .15s;}
+.ftag:hover{border-color:#aaa;}
+.ftag.active{background:#e6f1fb;color:#185fa5;border-color:#85b7eb;}
+.section-label{font-size:12px;font-weight:600;color:#888780;letter-spacing:.05em;text-transform:uppercase;margin:1.5rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid #e0dfd6;}
+.q-card{background:#fff;border:1px solid #e0dfd6;border-radius:12px;padding:1.1rem 1.35rem;margin-bottom:.75rem;transition:border-color .2s;}
+.q-card.correct{border-color:#1D9E75;background:#f4fbf8;}
+.q-card.wrong{border-color:#E24B4A;background:#fef6f6;}
+.q-meta{display:flex;gap:8px;margin-bottom:.6rem;align-items:center;flex-wrap:wrap;}
+.q-num{font-size:12px;color:#aaa;min-width:22px;}
+.q-tag{font-size:11px;padding:2px 9px;border-radius:20px;background:#f0efea;color:#666;}
+.q-tag-multi{font-size:11px;padding:2px 9px;border-radius:20px;background:#faeeda;color:#854f0b;}
+.q-tag-logic{font-size:11px;padding:2px 9px;border-radius:20px;background:#eaf3de;color:#3b6d11;}
+.q-text{font-size:15px;line-height:1.9;margin-bottom:.8rem;color:#1a1a18;}
+.hint{font-size:12px;color:#aaa;margin-bottom:.6rem;font-style:italic;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+@media(max-width:500px){.opts{grid-template-columns:1fr;}}
+.opt{font-size:13.5px;padding:8px 13px;border-radius:8px;border:1px solid #e0dfd6;background:#f9f9f6;color:#1a1a18;cursor:pointer;text-align:left;transition:all .15s;line-height:1.5;}
+.opt:hover:not(:disabled){border-color:#aaa;background:#f0efea;}
+.opt.selected{border-color:#378add;background:#e6f1fb;color:#185fa5;}
+.opt.right{border-color:#1D9E75;background:#e1f5ee;color:#085041;}
+.opt.wrong-pick{border-color:#E24B4A;background:#fcebeb;color:#791f1f;}
+.opt.missed{border-color:#EF9F27;background:#faeeda;color:#633806;}
+.opt:disabled{cursor:default;}
+.submit-btn{margin-top:.7rem;font-size:13px;padding:6px 18px;border-radius:8px;border:1px solid #ccc;background:#fff;cursor:pointer;color:#555;}
+.submit-btn:hover{background:#f0efea;}
+.explain{margin-top:.7rem;font-size:13px;color:#666;line-height:1.75;display:none;padding:.6rem .85rem;background:#f5f5f0;border-radius:8px;border-left:3px solid #1D9E75;}
+.explain.show{display:block;}
+.ctrl-row{display:flex;gap:10px;margin-top:2rem;flex-wrap:wrap;}
+.ctrl-btn{font-size:13px;padding:8px 20px;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer;color:#555;}
+.ctrl-btn:hover{background:#f0efea;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#888;margin-top:1.5rem;padding:1rem;background:#fff;border-radius:8px;border:1px solid #e0dfd6;}
+.legend-item{display:flex;align-items:center;gap:5px;}
+.dot{width:10px;height:10px;border-radius:50%;}
+footer{text-align:center;font-size:12px;color:#bbb;margin-top:3rem;padding-top:1rem;border-top:1px solid #e0dfd6;}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>环保主题语法练习 — HSK 4–5</h1>
+    <p>70题 · 涵盖：够 · 以 · 以…为… · 以便/以免/以防 · 既然 · 逻辑知识 · 多选题</p>
+  </header>
+
+  <div class="top-bar">
+    <div class="score-box">
+      <div class="metric"><div class="val" id="v-done">0</div><div class="lbl">已完成</div></div>
+      <div class="metric"><div class="val" id="v-correct">0</div><div class="lbl">答对</div></div>
+      <div class="metric"><div class="val" id="v-pct">0%</div><div class="lbl">正确率</div></div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">重新开始</button>
+  </div>
+
+  <div class="prog-bar"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+
+  <div class="filter-row">
+    <button class="ftag active" onclick="filterBy('all',this)">全部 (70)</button>
+    <button class="ftag" onclick="filterBy('够',this)">够 (10)</button>
+    <button class="ftag" onclick="filterBy('以',this)">以 (10)</button>
+    <button class="ftag" onclick="filterBy('以为',this)">以…为… (10)</button>
+    <button class="ftag" onclick="filterBy('以目的',this)">以便/以免/以防 (10)</button>
+    <button class="ftag" onclick="filterBy('既然',this)">既然 (10)</button>
+    <button class="ftag" onclick="filterBy('logic',this)">逻辑+知识 (10)</button>
+    <button class="ftag" onclick="filterBy('multi',this)">多选题 (10)</button>
+  </div>
+
+  <div id="qlist"></div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="dot" style="background:#1D9E75"></div> 答对</div>
+    <div class="legend-item"><div class="dot" style="background:#E24B4A"></div> 答错</div>
+    <div class="legend-item"><div class="dot" style="background:#EF9F27"></div> 漏选（多选题）</div>
+  </div>
+
+  <div class="ctrl-row">
+    <button class="ctrl-btn" onclick="showAll()">显示所有答案</button>
+  </div>
+
+  <footer>HSK 4–5 · 环境保护主题 · 语法练习</footer>
+</div>
+
+<script>
+const qs=[
+{tag:'够',type:'single',text:'塑料袋对环境的危害_____大的了，很多国家已经开始禁止使用了。',opts:['A. 非常','B. 够','C. 十分','D. 相当'],ans:[1],exp:'"够+adj+的"表示程度已达相当高的标准，含感叹语气，口语中常见。'},
+{tag:'够',type:'single',text:'这次环保活动准备的宣传材料_____，每个参与者都能拿到一份。',opts:['A. 很多','B. 够多的了','C. 够','D. 满足'],ans:[2],exp:'"够"作动词，表示数量上能满足需求，"够+宾语"是常见结构。'},
+{tag:'够',type:'single',text:'现在城市里的空气污染_____严重的了，很多人出门都戴口罩。',opts:['A. 够','B. 很','C. 比较','D. 有点'],ans:[0],exp:'"够+adj+的"在肯定句中表示程度高，隐含无奈或感叹语气。'},
+{tag:'够',type:'single',text:'我们回收的废纸_____造一千本新书，请大家继续支持垃圾分类。',opts:['A. 可以','B. 足以','C. 够','D. 能'],ans:[2],exp:'"够"作动词，"够+动词短语"表示数量足以完成某事。'},
+{tag:'够',type:'single',text:'只要大家的环保意识_____强，地球的未来一定会更美好。',opts:['A. 够','B. 很','C. 非常','D. 特别'],ans:[0],exp:'"只要……够+adj"表示条件充足，达到足够的程度。'},
+{tag:'够',type:'single',text:'这个工厂排放的污水_____脏的了，附近的河流已经变成黑色了。',opts:['A. 十分','B. 够','C. 太','D. 极'],ans:[1],exp:'"够+adj+的"表达强烈的感叹，含批评或惊叹的语气。'},
+{tag:'够',type:'single',text:'政府为改善空气质量所做的努力_____多了，但还需要市民的配合。',opts:['A. 够','B. 很','C. 相当','D. 非常'],ans:[0],exp:'"够+adj+了"表示程度已到位，含"已经足够"的意思。'},
+{tag:'够',type:'single',text:'冰箱里存放的蔬菜_____我们一家人吃三天，不需要每天都去超市。',opts:['A. 足以','B. 够','C. 可以','D. 能够'],ans:[1],exp:'"够"作动词，后接宾语和时间状语，表示数量满足需求。'},
+{tag:'够',type:'single',text:'你一个人_____完成这份关于碳排放的研究报告吗？内容太多了。',opts:['A. 够不够','B. 能够','C. 够能','D. 很能'],ans:[1],exp:'"能够"表示有能力完成，是固定搭配。'},
+{tag:'够',type:'single',text:'他在环保方面的知识_____丰富的了，讲起来头头是道。',opts:['A. 非常','B. 够','C. 十分','D. 相当'],ans:[1],exp:'"够+adj+的"含赞叹语气，表示程度相当高。'},
+{tag:'以',type:'single',text:'这家工厂决定_____更先进的技术来减少废气排放。',opts:['A. 用了','B. 以','C. 靠','D. 凭借了'],ans:[1],exp:'"以+名词"作状语，表示凭借，书面语，相当于"用"。'},
+{tag:'以',type:'single',text:'她每天骑自行车上班，_____减少碳排放，为环保出一份力。',opts:['A. 以','B. 为了','C. 所以','D. 来'],ans:[0],exp:'"以"作连词表目的，书面语，相当于"用来/为的是"，主语必须一致。'},
+{tag:'以',type:'single',text:'政府发布通知，要求各企业_____最严格的标准来控制污水排放。',opts:['A. 按','B. 以','C. 用着','D. 靠'],ans:[1],exp:'"以……来+动词"表示凭借某方式，是常见书面表达。'},
+{tag:'以',type:'single',text:'他把自己亲眼目睹的环境破坏_____照片的方式记录下来。',opts:['A. 以','B. 用','C. 靠','D. 凭'],ans:[0],exp:'"以……的方式"是固定书面结构，表示通过某种方式。'},
+{tag:'以',type:'single',text:'请大家把垃圾分类后再扔进垃圾桶，_____回收利用更方便。',opts:['A. 以防','B. 以免','C. 以便','D. 以'],ans:[2],exp:'"以便"引导正面目的，"回收利用更方便"是期望实现的结果。'},
+{tag:'以',type:'single',text:'出门时记得关掉空调，_____浪费不必要的电力。',opts:['A. 以便','B. 以防','C. 以','D. 以免'],ans:[3],exp:'"以免"后接负面结果，"浪费电力"是不希望发生的事。'},
+{tag:'以',type:'single',text:'城市应该多种树、多建公园，_____改善市区的空气质量。',opts:['A. 以','B. 因为','C. 所以','D. 但是'],ans:[0],exp:'"以"作连词表目的，用于后一分句句首，主语相同。'},
+{tag:'以',type:'single',text:'请随身携带环保袋，_____购物时不需要使用塑料袋。',opts:['A. 以便','B. 以免','C. 以防','D. 以'],ans:[0],exp:'"以便"引导正面目的，购物时不用塑料袋是期望实现的结果。'},
+{tag:'以',type:'single',text:'他_____亲身经历告诉同学们，乱扔垃圾会带来怎样的后果。',opts:['A. 以','B. 用了','C. 靠','D. 通过了'],ans:[0],exp:'"以+名词"作状语，"以亲身经历"是书面常用结构。'},
+{tag:'以',type:'single',text:'政府_____颁布新法律来加强对环境污染行为的处罚力度。',opts:['A. 以','B. 用','C. 靠','D. 凭'],ans:[0],exp:'"以……来……"表示凭借某手段实现目的，书面语。'},
+{tag:'以为',type:'single',text:'这家企业一直_____绿色生产为核心理念，深受消费者欢迎。',opts:['A. 把……作为','B. 以……为','C. 用……做','D. 拿……当'],ans:[1],exp:'"以……为……"是书面语固定结构，表示"把……作为……"。'},
+{tag:'以为',type:'single',text:'我们应该_____节约资源为荣，_____浪费为耻。',opts:['A. 以……以','B. 把……把','C. 以……为','D. 用……用'],ans:[2],exp:'"以……为荣/为耻"是固定搭配，表示以某事为荣耀或耻辱。'},
+{tag:'以为',type:'single',text:'这次环保课程_____实践活动为主，理论讲解为辅。',opts:['A. 以……为','B. 把……当','C. 用','D. 让'],ans:[0],exp:'"以……为主，……为辅"是固定结构，表示主次关系。'},
+{tag:'以为',type:'single',text:'制定环保政策时，政府应该_____人民的健康为最高优先级。',opts:['A. 把','B. 拿','C. 以……为','D. 让'],ans:[2],exp:'"以……为最高优先级"表示把某事作为最重要的考量标准。'},
+{tag:'以为',type:'single',text:'这位科学家_____研究气候变化为毕生事业，贡献了几十年的心血。',opts:['A. 把……当','B. 以……为','C. 用……做','D. 拿……作'],ans:[1],exp:'"以……为……"表示把某事作为某物，书面语。'},
+{tag:'以为',type:'single',text:'本次环保展览_____青少年为主要目标群体，希望从小培养环保意识。',opts:['A. 以……为','B. 把……当作','C. 拿……作','D. 用……做'],ans:[0],exp:'"以……为主要目标群体"定位受众，是书面常见结构。'},
+{tag:'以为',type:'single',text:'这篇文章_____塑料污染为主题，提出了多项减少塑料使用的建议。',opts:['A. 把','B. 用','C. 以……为','D. 让……成'],ans:[2],exp:'"以……为主题"固定搭配，以某内容作为核心话题。'},
+{tag:'以为',type:'single',text:'环保组织_____"地球只有一个"为口号，呼吁大家共同保护环境。',opts:['A. 以……为','B. 把……当','C. 用……作','D. 让……是'],ans:[0],exp:'"以……为口号"固定搭配，把某句话作为宣传口号。'},
+{tag:'以为',type:'single',text:'该公司_____减少碳排放为发展目标，每年都会公布环保报告。',opts:['A. 把','B. 以……为','C. 拿','D. 让'],ans:[1],exp:'"以……为发展目标"，把某事设定为努力方向，书面语。'},
+{tag:'以为',type:'single',text:'这次垃圾分类比赛_____参与人数为准，不以分类是否完美为标准。',opts:['A. 以……为','B. 把……当','C. 拿……做','D. 用……算'],ans:[0],exp:'"以……为准"固定搭配，表示以某项作为判断依据。'},
+{tag:'以目的',type:'single',text:'请大家把废旧电池放入专用回收箱，_____对土壤造成污染。',opts:['A. 以便','B. 以防','C. 以免','D. 以'],ans:[2],exp:'"以免"后接负面结果，"对土壤造成污染"是不希望发生的事。'},
+{tag:'以目的',type:'single',text:'超市已经将塑料袋改为可降解袋，_____减少白色污染。',opts:['A. 以防','B. 以便','C. 以免','D. 以'],ans:[1],exp:'"以便减少"，减少污染是期望目标，引导正面结果用"以便"。'},
+{tag:'以目的',type:'single',text:'出门时随手带一个环保袋，_____临时需要购物时避免使用塑料袋。',opts:['A. 以便','B. 以免','C. 以防','D. 以'],ans:[2],exp:'"以防"表示预防，提前准备以应对可能的情况。'},
+{tag:'以目的',type:'single',text:'工厂在排放废水前必须进行处理，_____直接污染河流。',opts:['A. 以便','B. 以防','C. 以免','D. 以'],ans:[2],exp:'"以免"后接负面结果，"直接污染河流"是要避免的情况。'},
+{tag:'以目的',type:'single',text:'政府在海边设置了专门的垃圾桶，_____游客方便丢垃圾。',opts:['A. 以防','B. 以免','C. 以便','D. 以'],ans:[2],exp:'"以便"引导正面目的，"方便丢垃圾"是期望实现的效果。'},
+{tag:'以目的',type:'single',text:'学校组织学生参观垃圾处理厂，_____同学们了解垃圾分类的全过程。',opts:['A. 以免','B. 以便','C. 以防','D. 以'],ans:[1],exp:'"以便了解"，了解全过程是正面目的，用"以便"。'},
+{tag:'以目的',type:'single',text:'请在森林里不要随意生火，_____引发火灾破坏生态环境。',opts:['A. 以便','B. 以防','C. 以免','D. 以'],ans:[2],exp:'"以免引发"，火灾是负面结果，用"以免"。'},
+{tag:'以目的',type:'single',text:'环保部门建议市民多种植绿色植物，_____净化室内空气。',opts:['A. 以防','B. 以免','C. 以便','D. 以'],ans:[2],exp:'"以便净化"，净化空气是正面目的，用"以便"。'},
+{tag:'以目的',type:'single',text:'出行时请记住关好车窗，_____尾气直接进入车内影响健康。',opts:['A. 以便','B. 以防','C. 以免','D. 以'],ans:[2],exp:'"以免"后接不希望发生的结果，用"以免"。'},
+{tag:'以目的',type:'single',text:'请多备一个垃圾袋在包里，_____外出时找不到垃圾桶时使用。',opts:['A. 以便','B. 以免','C. 以防','D. 以'],ans:[2],exp:'"以防……时"，预防外出时找不到垃圾桶的情况，用"以防"。'},
+{tag:'既然',type:'single',text:'_____你已经了解了塑料污染的严重性，就应该从今天开始减少使用塑料袋。',opts:['A. 虽然','B. 既然','C. 如果','D. 因为'],ans:[1],exp:'"既然"用于已知事实，后接推论行动，常与"就"搭配。'},
+{tag:'既然',type:'single',text:'_____大家都同意在社区推行垃圾分类，我们就尽快制定具体方案吧。',opts:['A. 因为','B. 既然','C. 尽管','D. 只要'],ans:[1],exp:'"既然……就"，前提已成事实，后推出合理结论。'},
+{tag:'既然',type:'single',text:'_____这家工厂多次违规排污，政府_____应该对其采取更严厉的处罚措施。',opts:['A. 既然……就','B. 虽然……但','C. 因为……所以','D. 如果……就'],ans:[0],exp:'"既然……就"，前提：多次违规；结论：应严厉处罚。'},
+{tag:'既然',type:'single',text:'A：今天的户外环保活动因为下雨取消了。B：_____这样，那我们改到室内进行宣传吧。',opts:['A. 既然','B. 虽然','C. 即使','D. 不管'],ans:[0],exp:'"既然这样"接受现实情况，顺势推出解决方案。'},
+{tag:'既然',type:'single',text:'_____你选择了乘坐公共交通出行，_____坚持下去，这对减少尾气排放很有帮助。',opts:['A. 既然……就','B. 虽然……也','C. 只要……就','D. 如果……会'],ans:[0],exp:'"既然……就"，已做出决定为前提，鼓励坚持为结论。'},
+{tag:'既然',type:'single',text:'_____环境污染已经影响到了我们的日常生活，我们每个人都有责任去改变现状。',opts:['A. 尽管','B. 既然','C. 虽然','D. 只要'],ans:[1],exp:'"既然"承认现实，推出每个人应负责的结论。'},
+{tag:'既然',type:'single',text:'_____你知道乱扔垃圾会受到罚款，就不应该再这样做了。',opts:['A. 只要','B. 既然','C. 因为','D. 如果'],ans:[1],exp:'"既然知道"，事实已知，推出不应再做的结论。'},
+{tag:'既然',type:'single',text:'_____政府已经规定禁止在公共场所吸烟，市民_____应该自觉遵守。',opts:['A. 既然……就','B. 虽然……但','C. 只要……就','D. 因为……所以'],ans:[0],exp:'"既然"承认法规已生效，推出市民应遵守的结论。'},
+{tag:'既然',type:'single',text:'_____他不愿意参加这次植树活动，我们就不要勉强他了，换别人来吧。',opts:['A. 因为','B. 虽然','C. 既然','D. 只要'],ans:[2],exp:'"既然"接受他不愿参加的事实，推出不勉强的结论。'},
+{tag:'既然',type:'single',text:'_____你觉得骑自行车既环保又健康，以后_____可以多骑车出行。',opts:['A. 既然……就','B. 虽然……也','C. 只要……就','D. 如果……会'],ans:[0],exp:'"既然……就"，已有认识为前提，推出实际行动建议。'},
+{tag:'logic',type:'single',text:'下面哪个句子的逻辑关系正确？',opts:['A. 既然工厂排放有毒废水，所以我们应该多喝水。','B. 既然塑料袋对环境有害，我们就应该减少使用。','C. 虽然空气污染很严重，就应该少开窗。','D. 以便减少垃圾，我们不应该出门购物。'],ans:[1],exp:'B正确："既然……就"结构，前提和结论逻辑一致。A推论无关，C应用"所以"，D"以便"后应接正面目的动作。'},
+{tag:'logic',type:'single',text:'"以免"和"以便"的区别是？',opts:['A. 两者意思完全相同，可以互换。','B. "以免"引导负面结果，"以便"引导正面目的。','C. "以免"用于口语，"以便"用于书面语。','D. "以便"只能用在句首，"以免"只能用在句末。'],ans:[1],exp:'"以便"表示目的（为了能够/方便……），后接期望发生的事；"以免"表示避免，后接不希望发生的结果。'},
+{tag:'logic',type:'single',text:'垃圾分类中，以下哪种垃圾应放入"有害垃圾"桶？',opts:['A. 剩饭剩菜','B. 废旧报纸','C. 废旧电池','D. 塑料瓶'],ans:[2],exp:'废旧电池含有重金属，属于有害垃圾，需单独回收处理。剩饭属厨余垃圾，报纸和塑料瓶属可回收垃圾。'},
+{tag:'logic',type:'single',text:'下列哪个行为有助于减少碳排放？',opts:['A. 每天开私家车上班','B. 长时间开着空调','C. 选择乘坐公共交通','D. 大量购买一次性用品'],ans:[2],exp:'选择公共交通出行可以减少私家车数量，从而降低尾气排放，有效减少碳排放。其他选项均会增加碳排放或垃圾量。'},
+{tag:'logic',type:'single',text:'"温室效应"是指什么？',opts:['A. 在温室里种植蔬菜的方法','B. 地球大气层吸收热量导致气温升高的现象','C. 夏天室内开空调造成室内外温差的现象','D. 工厂废气让周边温度升高的现象'],ans:[1],exp:'温室效应指大气中二氧化碳等温室气体增多，吸收地面辐射热量，导致地球平均气温上升的现象，是全球变暖的主要原因。'},
+{tag:'logic',type:'single',text:'以下哪个说法关于"可降解塑料"是正确的？',opts:['A. 可降解塑料在任何条件下都能立即分解。','B. 可降解塑料在特定条件下能被微生物分解，减少污染。','C. 可降解塑料和普通塑料对环境的影响完全一样。','D. 可降解塑料主要由石油原料制成。'],ans:[1],exp:'可降解塑料在特定温湿度和微生物条件下可被分解，相比普通塑料更环保，但并非在所有条件下都能快速降解。'},
+{tag:'logic',type:'single',text:'下面哪个句子中"够"的用法是错误的？',opts:['A. 这些垃圾桶够用了，不需要再买新的。','B. 今天的污染够严重的了，能见度不到五十米。','C. 他够不努力，所以环保项目没有成功。','D. 冰箱里的食物够我们吃两天。'],ans:[2],exp:'C错误："够+形容词"的副词用法表示"程度达到相当高的标准"，"够不努力"不符合逻辑，应改为"不够努力"。'},
+{tag:'logic',type:'single',text:'关于"酸雨"，以下哪个说法是正确的？',opts:['A. 酸雨是因为天空中有太多云彩造成的。','B. 酸雨主要由工业废气中的二氧化硫等物质溶于雨水形成。','C. 酸雨对植物没有影响，只影响建筑物。','D. 酸雨只在工业发达的国家才会出现。'],ans:[1],exp:'酸雨是工业排放的二氧化硫、氮氧化物等与大气中水分结合形成的酸性降水，会破坏土壤、水源、植被及建筑物。'},
+{tag:'logic',type:'single',text:'选出逻辑正确且语法通顺的句子。',opts:['A. 以防止污染，我们禁止工厂排放废水。','B. 既然空气质量这么差，以便大家减少出行。','C. 我们以减少碳排放为目标，以便下一代能生活在更好的环境中。','D. 够环保的了，这个工厂从来不处理废水。'],ans:[2],exp:'C正确："以……为目标"结构正确，"以便"引导正面目的，逻辑通顺。A"以防止"搭配错误，B"既然……以便"搭配混乱，D"够……的了"与"从不处理废水"逻辑矛盾。'},
+{tag:'logic',type:'single',text:'以下哪项是"碳中和"的正确解释？',opts:['A. 完全不排放任何二氧化碳。','B. 通过植树造林等方式抵消自身排放的二氧化碳，使净排放量为零。','C. 禁止所有工厂生产，以达到零排放目标。','D. 用碳替代其他化学物质进行工业生产。'],ans:[1],exp:'碳中和指企业或国家通过节能减排、植树造林、碳捕获等方式，抵消自身产生的二氧化碳排放，使净排放量达到零。'},
+{tag:'multi',type:'multi',text:'下列句子中，哪些句子使用"够"的方式是正确的？（多选）',opts:['A. 这次收集的废品够多了，可以卖一笔钱给慈善机构。','B. 他够努力，所以环保项目很成功。','C. 桶里的水够不够用来浇完所有的树？','D. 这个问题够简单，连小孩都知道要保护环境。'],ans:[0,1,2,3],exp:'A正确（够+adj+了）；B正确（够+adj，程度达标）；C正确（够不够，疑问用法）；D口语中可接受，更地道应为"够简单的"，四句均成立。'},
+{tag:'multi',type:'multi',text:'以下哪些句子中"以"的用法是正确的？（多选）',opts:['A. 工厂以减少排放为目标，积极推进绿色转型。','B. 我们应该以爱护环境的态度对待每一片土地。','C. 他以为保护森林，每个周末都去参加志愿活动。','D. 政府以严格的法规来约束企业的排污行为。'],ans:[0,1,3],exp:'A正确（以……为……）；B正确（以+名词短语作状语）；C错误，"以为"是"认为"的意思，与后文逻辑不符，应改为"为了"；D正确（以……来……表凭借）。'},
+{tag:'multi',type:'multi',text:'以下哪些行为有助于减少"白色污染"？（多选）',opts:['A. 购物时自带布袋或环保袋','B. 拒绝使用一次性塑料餐具','C. 将废旧塑料瓶投入可回收垃圾桶','D. 把用过的塑料袋洗净晾干后重复使用'],ans:[0,1,2,3],exp:'白色污染指废弃塑料造成的环境污染。以上四种做法均可有效减少白色污染：A减少新塑料袋使用，B减少一次性塑料，C促进塑料回收，D延长塑料使用寿命。'},
+{tag:'multi',type:'multi',text:'下列哪些句子使用"以便/以免/以防"正确？（多选）',opts:['A. 请把垃圾分类，以便回收人员更高效地处理。','B. 森林里不要乱丢烟蒂，以便引发山火。','C. 多带一件外套，以防天气突然降温。','D. 请关好水龙头，以免水资源浪费。'],ans:[0,2,3],exp:'A正确（以便引导正面目的）；B错误，"以便引发山火"逻辑矛盾，应改为"以免引发山火"；C正确（以防预防负面情况）；D正确（以免避免浪费）。'},
+{tag:'multi',type:'multi',text:'以下哪些是导致全球变暖的主要原因？（多选）',opts:['A. 大量燃烧化石燃料（煤、石油、天然气）','B. 工业生产排放大量温室气体','C. 全球人口数量增加导致体温散发','D. 大规模砍伐森林减少了碳吸收'],ans:[0,1,3],exp:'A和B是主要工业原因；D是重要原因（森林是碳汇，砍伐后吸碳能力下降）；C错误，人体散热对全球气温影响极为微小，不是主要原因。'},
+{tag:'multi',type:'multi',text:'下列哪些句子"既然"使用正确？（多选）',opts:['A. 既然我们知道了环境问题的严重性，就更应该从小事做起。','B. 既然明天可能下雨，就带上雨伞吧。','C. 既然他努力学习，他也许会考上好大学。','D. 既然工厂已经停止排污，我们就不必担心河流被污染了。'],ans:[0,3],exp:'A正确（已知事实→推论行动）；D正确（工厂停排为已发生事实→推出结论）；B错误，"可能"表示不确定，应用"如果"；C错误，"也许"表示不确定，与"既然"矛盾。'},
+{tag:'multi',type:'multi',text:'以下哪些措施属于"低碳生活"的具体做法？（多选）',opts:['A. 尽量选择步行、骑车或乘坐公共交通','B. 减少肉食摄入，多吃蔬菜水果','C. 购买最新款电子产品以获得最佳性能','D. 随手关灯、拔掉不用的电器插头'],ans:[0,1,3],exp:'低碳生活指减少温室气体排放的生活方式。A减少交通碳排放；B畜牧业是重要碳排放来源；D节约用电减少发电碳排；C频繁更换电子产品反而增加碳排放，不属于低碳做法。'},
+{tag:'multi',type:'multi',text:'下列关于垃圾分类，哪些说法是正确的？（多选）',opts:['A. 厨余垃圾（湿垃圾）可以用来堆肥，转化为有机肥料。','B. 旧报纸、纸板箱属于可回收垃圾。','C. 碎玻璃和旧镜子可以直接放入普通可回收桶，不需要特殊处理。','D. 过期药品属于有害垃圾，应投入专用回收箱。'],ans:[0,1,3],exp:'A正确（厨余可堆肥）；B正确（纸类可回收）；C错误，碎玻璃有安全隐患，需特殊处理；D正确（过期药品含有害成分，属有害垃圾）。'},
+{tag:'multi',type:'multi',text:'下列哪些句子语法和逻辑都正确？（多选）',opts:['A. 我们以保护地球环境为己任，努力减少日常生活中的浪费。','B. 既然你不够努力，所以环保项目才会失败。','C. 请把废旧电池单独存放，以免与其他垃圾混放后造成土壤污染。','D. 工厂以最先进的技术来处理废水，以便减少对河流的污染。'],ans:[0,2,3],exp:'A正确（以……为己任，逻辑清晰）；B错误，"既然……所以"搭配错误，应为"既然……就"；C正确（以免+负面结果）；D正确（以……来……，以便+正面目的）。'},
+{tag:'multi',type:'multi',text:'关于环境保护，以下哪些说法是正确的？（多选）',opts:['A. 海洋中的塑料垃圾可能进入食物链，最终影响人类健康。','B. 植树造林不仅能吸收二氧化碳，还能防止水土流失。','C. 只要发达国家减少排放，发展中国家可以不必参与环保行动。','D. 可再生能源（如太阳能、风能）的开发有助于减少对化石燃料的依赖。'],ans:[0,1,3],exp:'A正确（微塑料已进入食物链）；B正确（森林有碳汇和水土保持双重作用）；C错误，环境保护是全球共同责任；D正确（可再生能源是减碳关键途径之一）。'},
+];
+
+let answered={},multiSel={},correct=0,filter='all';
+
+function filterBy(tag,el){
+  filter=tag;
+  document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+
+function render(){
+  const list=document.getElementById('qlist');
+  list.innerHTML='';
+  const visible=qs.filter(q=>filter==='all'||q.tag===filter);
+  visible.forEach((q,vi)=>{
+    const gi=qs.indexOf(q);
+    const isMulti=q.type==='multi';
+    const done=answered[gi]!==undefined;
+    let cardClass='q-card';
+    if(done){
+      if(isMulti){
+        const sel=multiSel[gi]||[];
+        const cs=q.ans.slice().sort().join(',');
+        const ss=sel.slice().sort().join(',');
+        cardClass+= ss===cs?' correct':' wrong';
+      } else {
+        cardClass+=answered[gi]===q.ans[0]?' correct':' wrong';
+      }
+    }
+    let tagHtml='';
+    if(isMulti) tagHtml='<span class="q-tag-multi">多选题</span>';
+    else if(q.tag==='logic') tagHtml='<span class="q-tag-logic">逻辑+知识</span>';
+    else tagHtml=done?`<span class="q-tag">${q.tag}</span>`:'<span class="q-tag" style="opacity:0;pointer-events:none;">??</span>';
+    const hintHtml=isMulti?'<div class="hint">可选多个答案，选完后点"提交答案"</div>':'';
+    const optHtml=q.opts.map((o,oi)=>{
+      let cls='opt';
+      if(done){
+        const isC=q.ans.includes(oi);
+        if(isMulti){
+          const sel=multiSel[gi]||[];
+          if(isC&&sel.includes(oi))cls+=' right';
+          else if(isC&&!sel.includes(oi))cls+=' missed';
+          else if(!isC&&sel.includes(oi))cls+=' wrong-pick';
+        } else {
+          if(isC)cls+=' right';
+          else if(answered[gi]===oi)cls+=' wrong-pick';
+        }
+      } else if(isMulti&&(multiSel[gi]||[]).includes(oi)){
+        cls+=' selected';
+      }
+      const fn=isMulti?`toggleMulti(${gi},${oi})`:`pickSingle(${gi},${oi})`;
+      return `<button class="${cls}" onclick="${fn}" ${done?'disabled':''}>${o}</button>`;
+    }).join('');
+    const submitHtml=isMulti&&!done?'<button class="submit-btn" onclick="submitMulti('+gi+')">提交答案</button>':'';
+    const div=document.createElement('div');
+    div.className=cardClass;
+    div.id='qc'+gi;
+    div.innerHTML=`<div class="q-meta"><span class="q-num">${vi+1}</span>${tagHtml}</div><div class="q-text">${q.text}</div>${hintHtml}<div class="opts">${optHtml}</div>${submitHtml}<div class="explain ${done?'show':''}">${q.exp}</div>`;
+    list.appendChild(div);
+  });
+  updateStats();
+}
+
+function pickSingle(gi,oi){
+  if(answered[gi]!==undefined)return;
+  answered[gi]=oi;
+  if(oi===qs[gi].ans[0])correct++;
+  render();
+  setTimeout(()=>{const el=document.getElementById('qc'+gi);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});},100);
+}
+
+function toggleMulti(gi,oi){
+  if(answered[gi]!==undefined)return;
+  if(!multiSel[gi])multiSel[gi]=[];
+  const idx=multiSel[gi].indexOf(oi);
+  if(idx===-1)multiSel[gi].push(oi);
+  else multiSel[gi].splice(idx,1);
+  render();
+}
+
+function submitMulti(gi){
+  if(answered[gi]!==undefined)return;
+  const sel=(multiSel[gi]||[]).slice().sort().join(',');
+  const cs=qs[gi].ans.slice().sort().join(',');
+  answered[gi]=sel;
+  if(sel===cs)correct++;
+  render();
+}
+
+function updateStats(){
+  const done=Object.keys(answered).length;
+  document.getElementById('v-done').textContent=done;
+  document.getElementById('v-correct').textContent=correct;
+  document.getElementById('v-pct').textContent=done>0?Math.round(correct/done*100)+'%':'0%';
+  document.getElementById('prog').style.width=Math.round(done/qs.length*100)+'%';
+}
+
+function showAll(){
+  qs.forEach((q,gi)=>{
+    if(answered[gi]===undefined){
+      if(q.type==='multi'){multiSel[gi]=q.ans;answered[gi]=q.ans.slice().sort().join(',');}
+      else answered[gi]=q.ans[0];
+    }
+  });
+  render();
+}
+
+function resetAll(){answered={};multiSel={};correct=0;render();}
+render();
+</script>
+</body>
+</html>
